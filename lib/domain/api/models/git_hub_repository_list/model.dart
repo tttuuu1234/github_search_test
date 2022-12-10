@@ -8,6 +8,14 @@ abstract class GitHubRepositoryListModel with _$GitHubRepositoryListModel {
   factory GitHubRepositoryListModel({
     required List<GitHubRepositoryModel> list,
   }) = _GitHubRepositoryListModel;
+
+  factory GitHubRepositoryListModel.fromJson(List<dynamic> json) {
+    final list = json.map((e) {
+      return GitHubRepositoryModel.fromJson(e as Map<String, dynamic>);
+    }).toList();
+
+    return GitHubRepositoryListModel(list: list);
+  }
 }
 
 @freezed
