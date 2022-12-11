@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/presentation/pages/home/notifier.dart';
+import 'notifier.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});

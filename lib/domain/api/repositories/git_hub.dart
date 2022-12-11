@@ -1,5 +1,5 @@
-import 'package:github_search/domain/api/models/git_hub_repository_list/model.dart';
-import 'package:github_search/domain/api/response/result.dart';
+import '../models/git_hub_repository_list/model.dart';
+import '../response/result.dart';
 
 /// GitHubに関連するrepository
 abstract class GitHubRepository {

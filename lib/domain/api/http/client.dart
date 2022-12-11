@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:github_search/domain/api/http/path.dart';
+import 'path.dart';
 
 class HttpClient {
   final accessToken = const String.fromEnvironment("GIT_HUB_ACCESS_TOKEN");
