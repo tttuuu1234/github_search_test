@@ -27,12 +27,32 @@ class HttpClient {
     debugPrint(response.body);
     log('---Finish http request get---');
 
-    switch (response.statusCode) {
-      case 404:
-        throw Exception('404です！！！');
-      default:
-    }
-
+    _handleException(response);
     return response;
   }
+}
+
+void _handleException(http.Response response) {
+  switch (response.statusCode) {
+    case 400:
+      throw Exception(_getErrorMessage(response));
+    case 404:
+      throw Exception(_getErrorMessage(response));
+    default:
+  }
+}
+
+String _getErrorMessage(http.Response response) {
+  var message = '';
+  switch (response.statusCode) {
+    case 400:
+      message = '400です';
+      break;
+    case 404:
+      message = '404です！！';
+      break;
+    default:
+  }
+
+  return message;
 }

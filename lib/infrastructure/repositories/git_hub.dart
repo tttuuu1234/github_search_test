@@ -11,18 +11,14 @@ class GitHubRepositoryImpl implements GitHubRepository {
 
   @override
   Future<Result<GitHubRepositoryListModel>> fetchRepositoryList() async {
-    try {
-      final response = await httpClient.get(
-        path: ApiPath.fetchListPublicRepositories,
-      );
-      return Result<GitHubRepositoryListModel>.fromResponse(
-        response: response,
-        fromJson: (body) {
-          return GitHubRepositoryListModel.fromJson(body);
-        },
-      );
-    } on Exception catch (e) {
-      throw Exception(e);
-    }
+    final response = await httpClient.get(
+      path: ApiPath.fetchListPublicRepositories,
+    );
+    return Result<GitHubRepositoryListModel>.fromResponse(
+      response: response,
+      fromJson: (body) {
+        return GitHubRepositoryListModel.fromJson(body);
+      },
+    );
   }
 }
