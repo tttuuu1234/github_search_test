@@ -1,9 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search/domain/api/repositories/git_hub.dart';
-import 'package:github_search/infrastructure/repositories/git_hub.dart';
+import 'package:github_search/domain/api/response/result.dart';
 import 'package:github_search/presentation/pages/home/state.dart';
+
+import '../../../provider/repository.dart';
 
 final gitHubRespositoryListProvider = StateNotifierProvider<
     GitHubRepositoryListNotifier, AsyncValue<GitHubRepositoryListState>>((ref) {
@@ -23,22 +23,21 @@ class GitHubRepositoryListNotifier
   final GitHubRepository gitHubRepository;
 
   Future<void> fetchList() async {
-    state = await AsyncValue.guard(() async {
-      final result = await gitHubRepository.fetchRepositoryList();
-      final res = result.when(
-        success: (value) {
-          print('成功！');
-          log(value.list.toString());
-          return GitHubRepositoryListState();
-        },
-        failure: (error) {
-          print('失敗');
-          log(error);
-          return GitHubRepositoryListState();
-        },
-      );
+    try {
+      final response = await gitHubRepository.fetchRepositoryList();
+      final data = response.data;
 
-      return res;
-    });
+      if (ResultStatus.failure == response.status || data == null) {
+        throw Exception(response.msg);
+      }
+
+      final list = data.list.map((e) {
+        return GitHubRepositoryState.fromModel(e);
+      }).toList();
+
+      state = AsyncValue.data(GitHubRepositoryListState(list: list));
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
   }
 }

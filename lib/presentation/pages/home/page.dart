@@ -19,13 +19,14 @@ class HomePage extends ConsumerWidget {
               ),
               SliverFixedExtentList(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 20,
+                  childCount: data.list.length,
                   (context, index) {
+                    final item = data.list[index];
                     return ListTile(
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(index.toString()),
+                          Text(item.name),
                           const Text('説明'),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +51,7 @@ class HomePage extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) => Center(child: Text(error.toString())),
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );
   }
