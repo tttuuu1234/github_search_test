@@ -12,6 +12,11 @@ final gitHubRespositoryListProvider = StateNotifierProvider<
   );
 });
 
+final homePageProvider =
+    StateNotifierProvider<HomePageNotifier, HomePageState>((ref) {
+  return HomePageNotifier();
+});
+
 class GitHubRepositoryListNotifier
     extends StateNotifier<AsyncValue<GitHubRepositoryListState>> {
   GitHubRepositoryListNotifier({
@@ -39,5 +44,17 @@ class GitHubRepositoryListNotifier
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
+  }
+}
+
+class HomePageNotifier extends StateNotifier<HomePageState> {
+  HomePageNotifier() : super(HomePageState(isShowList: true));
+
+  void showList() {
+    state = state.copyWith(isShowList: true);
+  }
+
+  void hideList() {
+    state = state.copyWith(isShowList: false);
   }
 }

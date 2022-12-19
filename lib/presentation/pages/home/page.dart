@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../components/widget.dart';
+import '../../components/search_text_filed/widget.dart';
 import 'notifier.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -22,6 +22,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final fetchGitHubRepositoryList = ref.watch(gitHubRespositoryListProvider);
+    final state = ref.watch(homePageProvider);
+    final notifier = ref.watch(homePageProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -36,73 +38,90 @@ class _HomePageState extends ConsumerState<HomePage> {
                     height: 50,
                     child: SearchTextFiled(
                       keywordController: keywordController,
+                      onChanged: (_) {
+                        if (keywordController.text.isEmpty) {
+                          notifier.showList();
+                          return;
+                        }
+
+                        if (!state.isShowList) {
+                          return;
+                        }
+
+                        notifier.hideList();
+                      },
                     ),
                   ),
                   backgroundColor: Colors.white,
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(8),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: data.list.length,
-                      (context, index) {
-                        final item = data.list[index];
-                        item.owner.avatarUrl;
+                state.isShowList
+                    ? SliverPadding(
+                        padding: const EdgeInsets.all(8),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: data.list.length,
+                            (context, index) {
+                              final item = data.list[index];
+                              item.owner.avatarUrl;
 
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          child: ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    _AvatarImageArea(
-                                      avaterUrl: item.owner.avatarUrl,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(item.owner.name),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  item.name,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(item.description),
-                                const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.star_border),
-                                    Flexible(
-                                      child: Text(
-                                        item.startCount.toString(),
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 8),
+                                child: ListTile(
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          _AvatarImageArea(
+                                            avaterUrl: item.owner.avatarUrl,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(item.owner.name),
+                                        ],
                                       ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        item.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(item.description),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        children: [
+                                          const Icon(Icons.star_border),
+                                          Flexible(
+                                            child: Text(
+                                              item.startCount.toString(),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 16),
+                                          const Icon(Icons.circle_sharp),
+                                          Flexible(child: Text(item.language)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  shape: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey.shade300,
                                     ),
-                                    const SizedBox(width: 16),
-                                    const Icon(Icons.circle_sharp),
-                                    Flexible(child: Text(item.language)),
-                                  ],
+                                  ),
+                                  onTap: () {
+                                    print('詳細画面遷移');
+                                  },
                                 ),
-                              ],
-                            ),
-                            shape: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey.shade300,
-                              ),
-                            ),
-                            onTap: () {
-                              print('詳細画面遷移');
+                              );
                             },
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
+                        ),
+                      )
+                    : SliverToBoxAdapter(
+                        child: Text(keywordController.text),
+                      ),
               ],
             ),
           );
@@ -113,6 +132,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 }
+
 class _AvatarImageArea extends StatelessWidget {
   const _AvatarImageArea({
     Key? key,

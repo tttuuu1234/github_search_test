@@ -45,3 +45,10 @@ abstract class OwnerState with _$OwnerState {
     );
   }
 }
+
+@freezed
+abstract class HomePageState with _$HomePageState {
+  factory HomePageState({
+    required bool isShowList,
+  }) = _HomePageState;
+}
