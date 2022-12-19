@@ -38,6 +38,10 @@ abstract class Result<T> with _$Result<T> {
       data: data,
     );
   }
+
+  // bool get isSuccess => ResultStatus.success == status;
+
+  // bool get isFailure => ResultStatus.failure == status;
 }
 
 enum ResultStatus {

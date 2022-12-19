@@ -5,16 +5,14 @@ import 'package:http/http.dart' as http;
 import 'path.dart';
 
 class HttpClient {
-  final accessToken = const String.fromEnvironment("GIT_HUB_ACCESS_TOKEN");
+  final accessToken = const String.fromEnvironment('GIT_HUB_ACCESS_TOKEN');
 
   Future<http.Response> get({
     required ApiPath path,
+    Map<String, dynamic>? query,
   }) async {
     log('---Start http request get---');
-    final url = Uri.https(
-      'api.github.com',
-      '/${path.value}',
-    );
+    final url = Uri.https('api.github.com', '/${path.value}', query);
     final response = await http.get(
       url,
       headers: {

@@ -1,7 +1,10 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../common/git_hub_repository/model.dart';
+
 part 'model.freezed.dart';
-part 'model.g.dart';
 
 @freezed
 abstract class GitHubRepositoryListModel with _$GitHubRepositoryListModel {
@@ -17,14 +20,4 @@ abstract class GitHubRepositoryListModel with _$GitHubRepositoryListModel {
 
     return GitHubRepositoryListModel(list: list);
   }
-}
-
-@freezed
-abstract class GitHubRepositoryModel with _$GitHubRepositoryModel {
-  factory GitHubRepositoryModel({
-    @JsonKey(name: 'name') required String name,
-  }) = _GitHubRepositoryModel;
-
-  factory GitHubRepositoryModel.fromJson(Map<String, dynamic> json) =>
-      _$GitHubRepositoryModelFromJson(json);
 }
