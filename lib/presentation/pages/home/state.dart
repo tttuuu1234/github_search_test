@@ -50,5 +50,6 @@ abstract class OwnerState with _$OwnerState {
 abstract class HomePageState with _$HomePageState {
   factory HomePageState({
     required bool isShowList,
+    @Default(1) int pageNumber,
   }) = _HomePageState;
 }

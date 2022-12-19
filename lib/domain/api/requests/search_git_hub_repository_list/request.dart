@@ -10,6 +10,7 @@ abstract class SearchGitHubRepositoryListRequest
     with _$SearchGitHubRepositoryListRequest {
   factory SearchGitHubRepositoryListRequest({
     @JsonKey(name: 'q') required String keyword,
+    @JsonKey(name: 'page') required int page,
   }) = _SearchGitHubRepositoryListRequest;
 
   factory SearchGitHubRepositoryListRequest.fromJson(

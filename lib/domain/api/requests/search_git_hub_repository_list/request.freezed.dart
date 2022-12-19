@@ -23,6 +23,8 @@ SearchGitHubRepositoryListRequest _$SearchGitHubRepositoryListRequestFromJson(
 mixin _$SearchGitHubRepositoryListRequest {
   @JsonKey(name: 'q')
   String get keyword => throw _privateConstructorUsedError;
+  @JsonKey(name: 'page')
+  int get page => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +40,8 @@ abstract class $SearchGitHubRepositoryListRequestCopyWith<$Res> {
       _$SearchGitHubRepositoryListRequestCopyWithImpl<$Res,
           SearchGitHubRepositoryListRequest>;
   @useResult
-  $Res call({@JsonKey(name: 'q') String keyword});
+  $Res call(
+      {@JsonKey(name: 'q') String keyword, @JsonKey(name: 'page') int page});
 }
 
 /// @nodoc
@@ -56,12 +59,17 @@ class _$SearchGitHubRepositoryListRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? keyword = null,
+    Object? page = null,
   }) {
     return _then(_value.copyWith(
       keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -75,7 +83,8 @@ abstract class _$$_SearchGitHubRepositoryListRequestCopyWith<$Res>
       __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'q') String keyword});
+  $Res call(
+      {@JsonKey(name: 'q') String keyword, @JsonKey(name: 'page') int page});
 }
 
 /// @nodoc
@@ -92,12 +101,17 @@ class __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? keyword = null,
+    Object? page = null,
   }) {
     return _then(_$_SearchGitHubRepositoryListRequest(
       keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -107,7 +121,8 @@ class __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>
 class _$_SearchGitHubRepositoryListRequest
     implements _SearchGitHubRepositoryListRequest {
   _$_SearchGitHubRepositoryListRequest(
-      {@JsonKey(name: 'q') required this.keyword});
+      {@JsonKey(name: 'q') required this.keyword,
+      @JsonKey(name: 'page') required this.page});
 
   factory _$_SearchGitHubRepositoryListRequest.fromJson(
           Map<String, dynamic> json) =>
@@ -116,10 +131,13 @@ class _$_SearchGitHubRepositoryListRequest
   @override
   @JsonKey(name: 'q')
   final String keyword;
+  @override
+  @JsonKey(name: 'page')
+  final int page;
 
   @override
   String toString() {
-    return 'SearchGitHubRepositoryListRequest(keyword: $keyword)';
+    return 'SearchGitHubRepositoryListRequest(keyword: $keyword, page: $page)';
   }
 
   @override
@@ -127,12 +145,13 @@ class _$_SearchGitHubRepositoryListRequest
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchGitHubRepositoryListRequest &&
-            (identical(other.keyword, keyword) || other.keyword == keyword));
+            (identical(other.keyword, keyword) || other.keyword == keyword) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, keyword);
+  int get hashCode => Object.hash(runtimeType, keyword, page);
 
   @JsonKey(ignore: true)
   @override
@@ -153,7 +172,8 @@ class _$_SearchGitHubRepositoryListRequest
 abstract class _SearchGitHubRepositoryListRequest
     implements SearchGitHubRepositoryListRequest {
   factory _SearchGitHubRepositoryListRequest(
-          {@JsonKey(name: 'q') required final String keyword}) =
+          {@JsonKey(name: 'q') required final String keyword,
+          @JsonKey(name: 'page') required final int page}) =
       _$_SearchGitHubRepositoryListRequest;
 
   factory _SearchGitHubRepositoryListRequest.fromJson(
@@ -163,6 +183,9 @@ abstract class _SearchGitHubRepositoryListRequest
   @override
   @JsonKey(name: 'q')
   String get keyword;
+  @override
+  @JsonKey(name: 'page')
+  int get page;
   @override
   @JsonKey(ignore: true)
   _$$_SearchGitHubRepositoryListRequestCopyWith<
