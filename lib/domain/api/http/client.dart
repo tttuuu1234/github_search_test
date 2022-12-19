@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'path.dart';
 
 class HttpClient {
-  final accessToken = const String.fromEnvironment("GIT_HUB_ACCESS_TOKEN");
+  final accessToken = const String.fromEnvironment('GIT_HUB_ACCESS_TOKEN');
 
   Future<http.Response> get({
     required ApiPath path,
