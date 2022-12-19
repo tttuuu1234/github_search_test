@@ -22,6 +22,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final fetchGitHubRepositoryList = ref.watch(gitHubRespositoryListProvider);
+    final fetchListNotifier = ref.watch(gitHubRespositoryListProvider.notifier);
     final state = ref.watch(homePageProvider);
     final notifier = ref.watch(homePageProvider.notifier);
 
@@ -30,7 +31,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       body: fetchGitHubRepositoryList.when(
         data: (data) {
           return Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 8),
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
@@ -38,8 +39,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                     height: 50,
                     child: SearchTextFiled(
                       keywordController: keywordController,
-                      onChanged: (_) {
-                        if (keywordController.text.isEmpty) {
+                      onChanged: (value) {
+                        if (value.isEmpty) {
                           notifier.showList();
                           return;
                         }
@@ -49,6 +50,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                         }
 
                         notifier.hideList();
+                      },
+                      onSubmitted: (value) async {
+                        notifier.showList();
+                        await fetchListNotifier.searchRepositoryList(value);
                       },
                     ),
                   ),

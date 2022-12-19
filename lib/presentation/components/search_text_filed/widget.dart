@@ -5,11 +5,14 @@ class SearchTextFiled extends StatelessWidget {
   const SearchTextFiled({
     Key? key,
     required this.keywordController,
-    this.onChanged
+    this.onChanged,
+    this.onSubmitted,
   }) : super(key: key);
 
   final TextEditingController keywordController;
   final Function(String value)? onChanged;
+    final Function(String value)? onSubmitted;
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,7 @@ class SearchTextFiled extends StatelessWidget {
         ),
       ),
       onChanged: onChanged,
+      onSubmitted: onSubmitted,
     );
   }
 }
