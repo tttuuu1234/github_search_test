@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/domain/api/requests/search_git_hub_repository_list/request.dart';
+import '../../../domain/api/requests/search_git_hub_repository_list/request.dart';
 import '../../../domain/api/repositories/git_hub.dart';
 import '../../../domain/api/response/result.dart';
 import 'state.dart';
