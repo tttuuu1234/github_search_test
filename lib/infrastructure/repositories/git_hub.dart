@@ -1,5 +1,5 @@
-import 'package:github_search/domain/api/models/search_git_hub_repository_list/model.dart';
-import 'package:github_search/domain/api/requests/search_git_hub_repository_list/request.dart';
+import '../../domain/api/models/search_git_hub_repository_list/model.dart';
+import '../../domain/api/requests/search_git_hub_repository_list/request.dart';
 
 import '../../domain/api/http/client.dart';
 import '../../domain/api/http/path.dart';

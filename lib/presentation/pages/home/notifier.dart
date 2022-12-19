@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/domain/api/requests/search_git_hub_repository_list/request.dart';
+import '../../../domain/api/requests/search_git_hub_repository_list/request.dart';
 import '../../../domain/api/repositories/git_hub.dart';
 import '../../../domain/api/response/result.dart';
 import 'state.dart';
@@ -28,6 +28,8 @@ class GitHubRepositoryListNotifier
 
   final GitHubRepository gitHubRepository;
 
+  int page = 1;
+
   Future<void> fetchList() async {
     try {
       final response = await gitHubRepository.fetchRepositoryList();
@@ -50,7 +52,38 @@ class GitHubRepositoryListNotifier
   Future<void> searchRepositoryList(String keyword) async {
     try {
       state = const AsyncLoading();
-      final request = SearchGitHubRepositoryListRequest(keyword: keyword);
+      final request = SearchGitHubRepositoryListRequest(
+        keyword: keyword,
+        page: 1,
+      );
+      final response = await gitHubRepository.searchRepositoryList(
+        request: request,
+      );
+      final data = response.data;
+      if (ResultStatus.failure == response.status || data == null) {
+        throw Exception(response.msg);
+      }
+
+      print(data.list.length);
+
+      final list = data.list.map((e) {
+        return GitHubRepositoryState.fromModel(e);
+      }).toList();
+
+      state = AsyncValue.data(GitHubRepositoryListState(list: list));
+    } on Exception catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
+
+  Future<void> loadMore(String keyword) async {
+    try {
+      page++;
+      state = const AsyncLoading();
+      final request = SearchGitHubRepositoryListRequest(
+        keyword: keyword,
+        page: page,
+      );
       final response = await gitHubRepository.searchRepositoryList(
         request: request,
       );
