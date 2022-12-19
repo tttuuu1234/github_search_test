@@ -9,12 +9,10 @@ class HttpClient {
 
   Future<http.Response> get({
     required ApiPath path,
+    Map<String, dynamic>? query,
   }) async {
     log('---Start http request get---');
-    final url = Uri.https(
-      'api.github.com',
-      '/${path.value}',
-    );
+    final url = Uri.https('api.github.com', '/${path.value}', query);
     final response = await http.get(
       url,
       headers: {
