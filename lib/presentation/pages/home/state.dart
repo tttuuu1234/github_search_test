@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../domain/api/models/git_hub_repository_list/model.dart';
+import '../../../domain/api/models/common/git_hub_repository/model.dart';
 
 part 'state.freezed.dart';
 
