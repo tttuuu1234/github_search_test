@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search/presentation/components/loading_indicator/widget.dart';
+import 'package:github_search/presentation/pages/git_hub_repository_detail/page.dart';
 import 'package:github_search/presentation/styles/margin.dart';
 import 'package:github_search/presentation/styles/padding.dart';
 import '../../components/search_text_filed/widget.dart';
@@ -199,7 +200,12 @@ class _RepositoryListView extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      print('詳細画面遷移');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const GitHubRepositoryDetailPage(),
+                        ),
+                      );
                     },
                   ),
                 );
