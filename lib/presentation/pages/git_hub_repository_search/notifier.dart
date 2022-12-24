@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/api/requests/search_git_hub_repository_list/request.dart';
+import '../../../core/api/queries/search_git_hub_repository_list/query.dart';
 import '../../../core/api/repositories/git_hub.dart';
-import '../../../core/api/response/result.dart';
 import 'state.dart';
 
 import '../../../provider/repository.dart';
@@ -91,12 +90,12 @@ class GitHubRepositoryListNotifier
   Future<void> searchList(String keyword) async {
     try {
       state = const AsyncLoading();
-      final request = SearchGitHubRepositoryListRequest(
+      final query = SearchGitHubRepositoryListQuery(
         keyword: keyword,
         page: 1,
       );
       final response = await gitHubRepository.searchRepositoryList(
-        request: request,
+        query: query,
       );
       final data = response.data;
       if (response.isFailure || data == null) {
@@ -122,12 +121,12 @@ class GitHubRepositoryListNotifier
 
       state = _copyWithPrevious();
       searchListPage++;
-      final request = SearchGitHubRepositoryListRequest(
+      final query = SearchGitHubRepositoryListQuery(
         keyword: keyword,
         page: searchListPage,
       );
       final response = await gitHubRepository.searchRepositoryList(
-        request: request,
+        query: query,
       );
       final data = response.data;
       if (response.isFailure || data == null) {

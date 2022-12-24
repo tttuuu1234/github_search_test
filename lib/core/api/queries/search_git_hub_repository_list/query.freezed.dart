@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'request.dart';
+part of 'query.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SearchGitHubRepositoryListRequest _$SearchGitHubRepositoryListRequestFromJson(
+SearchGitHubRepositoryListQuery _$SearchGitHubRepositoryListQueryFromJson(
     Map<String, dynamic> json) {
-  return _SearchGitHubRepositoryListRequest.fromJson(json);
+  return _SearchGitHubRepositoryListQuery.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SearchGitHubRepositoryListRequest {
+mixin _$SearchGitHubRepositoryListQuery {
   @JsonKey(name: 'q')
   String get keyword => throw _privateConstructorUsedError;
   @JsonKey(name: 'page')
@@ -28,27 +28,27 @@ mixin _$SearchGitHubRepositoryListRequest {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SearchGitHubRepositoryListRequestCopyWith<SearchGitHubRepositoryListRequest>
+  $SearchGitHubRepositoryListQueryCopyWith<SearchGitHubRepositoryListQuery>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchGitHubRepositoryListRequestCopyWith<$Res> {
-  factory $SearchGitHubRepositoryListRequestCopyWith(
-          SearchGitHubRepositoryListRequest value,
-          $Res Function(SearchGitHubRepositoryListRequest) then) =
-      _$SearchGitHubRepositoryListRequestCopyWithImpl<$Res,
-          SearchGitHubRepositoryListRequest>;
+abstract class $SearchGitHubRepositoryListQueryCopyWith<$Res> {
+  factory $SearchGitHubRepositoryListQueryCopyWith(
+          SearchGitHubRepositoryListQuery value,
+          $Res Function(SearchGitHubRepositoryListQuery) then) =
+      _$SearchGitHubRepositoryListQueryCopyWithImpl<$Res,
+          SearchGitHubRepositoryListQuery>;
   @useResult
   $Res call(
       {@JsonKey(name: 'q') String keyword, @JsonKey(name: 'page') int page});
 }
 
 /// @nodoc
-class _$SearchGitHubRepositoryListRequestCopyWithImpl<$Res,
-        $Val extends SearchGitHubRepositoryListRequest>
-    implements $SearchGitHubRepositoryListRequestCopyWith<$Res> {
-  _$SearchGitHubRepositoryListRequestCopyWithImpl(this._value, this._then);
+class _$SearchGitHubRepositoryListQueryCopyWithImpl<$Res,
+        $Val extends SearchGitHubRepositoryListQuery>
+    implements $SearchGitHubRepositoryListQueryCopyWith<$Res> {
+  _$SearchGitHubRepositoryListQueryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -75,12 +75,12 @@ class _$SearchGitHubRepositoryListRequestCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SearchGitHubRepositoryListRequestCopyWith<$Res>
-    implements $SearchGitHubRepositoryListRequestCopyWith<$Res> {
-  factory _$$_SearchGitHubRepositoryListRequestCopyWith(
-          _$_SearchGitHubRepositoryListRequest value,
-          $Res Function(_$_SearchGitHubRepositoryListRequest) then) =
-      __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>;
+abstract class _$$_SearchGitHubRepositoryListQueryCopyWith<$Res>
+    implements $SearchGitHubRepositoryListQueryCopyWith<$Res> {
+  factory _$$_SearchGitHubRepositoryListQueryCopyWith(
+          _$_SearchGitHubRepositoryListQuery value,
+          $Res Function(_$_SearchGitHubRepositoryListQuery) then) =
+      __$$_SearchGitHubRepositoryListQueryCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,13 +88,13 @@ abstract class _$$_SearchGitHubRepositoryListRequestCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>
-    extends _$SearchGitHubRepositoryListRequestCopyWithImpl<$Res,
-        _$_SearchGitHubRepositoryListRequest>
-    implements _$$_SearchGitHubRepositoryListRequestCopyWith<$Res> {
-  __$$_SearchGitHubRepositoryListRequestCopyWithImpl(
-      _$_SearchGitHubRepositoryListRequest _value,
-      $Res Function(_$_SearchGitHubRepositoryListRequest) _then)
+class __$$_SearchGitHubRepositoryListQueryCopyWithImpl<$Res>
+    extends _$SearchGitHubRepositoryListQueryCopyWithImpl<$Res,
+        _$_SearchGitHubRepositoryListQuery>
+    implements _$$_SearchGitHubRepositoryListQueryCopyWith<$Res> {
+  __$$_SearchGitHubRepositoryListQueryCopyWithImpl(
+      _$_SearchGitHubRepositoryListQuery _value,
+      $Res Function(_$_SearchGitHubRepositoryListQuery) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>
     Object? keyword = null,
     Object? page = null,
   }) {
-    return _then(_$_SearchGitHubRepositoryListRequest(
+    return _then(_$_SearchGitHubRepositoryListQuery(
       keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
@@ -118,15 +118,15 @@ class __$$_SearchGitHubRepositoryListRequestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchGitHubRepositoryListRequest
-    implements _SearchGitHubRepositoryListRequest {
-  _$_SearchGitHubRepositoryListRequest(
+class _$_SearchGitHubRepositoryListQuery
+    implements _SearchGitHubRepositoryListQuery {
+  _$_SearchGitHubRepositoryListQuery(
       {@JsonKey(name: 'q') required this.keyword,
       @JsonKey(name: 'page') required this.page});
 
-  factory _$_SearchGitHubRepositoryListRequest.fromJson(
+  factory _$_SearchGitHubRepositoryListQuery.fromJson(
           Map<String, dynamic> json) =>
-      _$$_SearchGitHubRepositoryListRequestFromJson(json);
+      _$$_SearchGitHubRepositoryListQueryFromJson(json);
 
   @override
   @JsonKey(name: 'q')
@@ -137,14 +137,14 @@ class _$_SearchGitHubRepositoryListRequest
 
   @override
   String toString() {
-    return 'SearchGitHubRepositoryListRequest(keyword: $keyword, page: $page)';
+    return 'SearchGitHubRepositoryListQuery(keyword: $keyword, page: $page)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchGitHubRepositoryListRequest &&
+            other is _$_SearchGitHubRepositoryListQuery &&
             (identical(other.keyword, keyword) || other.keyword == keyword) &&
             (identical(other.page, page) || other.page == page));
   }
@@ -156,29 +156,28 @@ class _$_SearchGitHubRepositoryListRequest
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchGitHubRepositoryListRequestCopyWith<
-          _$_SearchGitHubRepositoryListRequest>
-      get copyWith => __$$_SearchGitHubRepositoryListRequestCopyWithImpl<
-          _$_SearchGitHubRepositoryListRequest>(this, _$identity);
+  _$$_SearchGitHubRepositoryListQueryCopyWith<
+          _$_SearchGitHubRepositoryListQuery>
+      get copyWith => __$$_SearchGitHubRepositoryListQueryCopyWithImpl<
+          _$_SearchGitHubRepositoryListQuery>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchGitHubRepositoryListRequestToJson(
+    return _$$_SearchGitHubRepositoryListQueryToJson(
       this,
     );
   }
 }
 
-abstract class _SearchGitHubRepositoryListRequest
-    implements SearchGitHubRepositoryListRequest {
-  factory _SearchGitHubRepositoryListRequest(
+abstract class _SearchGitHubRepositoryListQuery
+    implements SearchGitHubRepositoryListQuery {
+  factory _SearchGitHubRepositoryListQuery(
           {@JsonKey(name: 'q') required final String keyword,
           @JsonKey(name: 'page') required final int page}) =
-      _$_SearchGitHubRepositoryListRequest;
+      _$_SearchGitHubRepositoryListQuery;
 
-  factory _SearchGitHubRepositoryListRequest.fromJson(
-          Map<String, dynamic> json) =
-      _$_SearchGitHubRepositoryListRequest.fromJson;
+  factory _SearchGitHubRepositoryListQuery.fromJson(Map<String, dynamic> json) =
+      _$_SearchGitHubRepositoryListQuery.fromJson;
 
   @override
   @JsonKey(name: 'q')
@@ -188,7 +187,7 @@ abstract class _SearchGitHubRepositoryListRequest
   int get page;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchGitHubRepositoryListRequestCopyWith<
-          _$_SearchGitHubRepositoryListRequest>
+  _$$_SearchGitHubRepositoryListQueryCopyWith<
+          _$_SearchGitHubRepositoryListQuery>
       get copyWith => throw _privateConstructorUsedError;
 }

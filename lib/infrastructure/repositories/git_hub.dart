@@ -3,7 +3,7 @@ import '../../core/api/parameters/git_hub_repository_detail/parameter.dart';
 
 import '../../core/api/http/path.dart';
 import '../../core/api/models/search_git_hub_repository_list/model.dart';
-import '../../core/api/requests/search_git_hub_repository_list/request.dart';
+import '../../core/api/queries/search_git_hub_repository_list/query.dart';
 
 import '../../core/api/http/client.dart';
 import '../../core/api/models/git_hub_repository_list/model.dart';
@@ -34,11 +34,11 @@ class GitHubRepositoryImpl implements GitHubRepository {
 
   @override
   Future<Result<SearchGitHubRepositoryListModel>> searchRepositoryList({
-    required SearchGitHubRepositoryListRequest request,
+    required SearchGitHubRepositoryListQuery query,
   }) async {
     final response = await httpClient.get(
       apiPath: ApiPath.searchRepositories,
-      query: request.toJson(),
+      query: query.toJson(),
     );
 
     return Result.fromResponse(
