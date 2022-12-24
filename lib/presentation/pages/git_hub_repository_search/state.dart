@@ -48,10 +48,10 @@ abstract class OwnerState with _$OwnerState {
 }
 
 @freezed
-abstract class HomePageState with _$HomePageState {
-  factory HomePageState({
+abstract class GitHubRepositorySearchState with _$GitHubRepositorySearchState {
+  factory GitHubRepositorySearchState({
     @Default(true) bool isShowList,
     @Default(GitHubRespositoryFetchType.list)
         GitHubRespositoryFetchType fetchType,
-  }) = _HomePageState;
+  }) = _GitHubRepositorySearchState;
 }

@@ -14,9 +14,9 @@ final gitHubRespositoryListProvider = StateNotifierProvider<
   );
 });
 
-final homePageProvider =
-    StateNotifierProvider<HomePageNotifier, HomePageState>((ref) {
-  return HomePageNotifier();
+final gitHubRespotiroySearchProvider = StateNotifierProvider<
+    GitHubRepositorySearchNotifier, GitHubRepositorySearchState>((ref) {
+  return GitHubRepositorySearchNotifier();
 });
 
 class GitHubRepositoryListNotifier
@@ -151,8 +151,9 @@ class GitHubRepositoryListNotifier
   }
 }
 
-class HomePageNotifier extends StateNotifier<HomePageState> {
-  HomePageNotifier() : super(HomePageState());
+class GitHubRepositorySearchNotifier
+    extends StateNotifier<GitHubRepositorySearchState> {
+  GitHubRepositorySearchNotifier() : super(GitHubRepositorySearchState());
 
   void showList() {
     state = state.copyWith(isShowList: true);
