@@ -503,29 +503,32 @@ abstract class _OwnerState implements OwnerState {
 }
 
 /// @nodoc
-mixin _$HomePageState {
+mixin _$GitHubRepositorySearchState {
   bool get isShowList => throw _privateConstructorUsedError;
   GitHubRespositoryFetchType get fetchType =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HomePageStateCopyWith<HomePageState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GitHubRepositorySearchStateCopyWith<GitHubRepositorySearchState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomePageStateCopyWith<$Res> {
-  factory $HomePageStateCopyWith(
-          HomePageState value, $Res Function(HomePageState) then) =
-      _$HomePageStateCopyWithImpl<$Res, HomePageState>;
+abstract class $GitHubRepositorySearchStateCopyWith<$Res> {
+  factory $GitHubRepositorySearchStateCopyWith(
+          GitHubRepositorySearchState value,
+          $Res Function(GitHubRepositorySearchState) then) =
+      _$GitHubRepositorySearchStateCopyWithImpl<$Res,
+          GitHubRepositorySearchState>;
   @useResult
   $Res call({bool isShowList, GitHubRespositoryFetchType fetchType});
 }
 
 /// @nodoc
-class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
-    implements $HomePageStateCopyWith<$Res> {
-  _$HomePageStateCopyWithImpl(this._value, this._then);
+class _$GitHubRepositorySearchStateCopyWithImpl<$Res,
+        $Val extends GitHubRepositorySearchState>
+    implements $GitHubRepositorySearchStateCopyWith<$Res> {
+  _$GitHubRepositorySearchStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -552,22 +555,25 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
 }
 
 /// @nodoc
-abstract class _$$_HomePageStateCopyWith<$Res>
-    implements $HomePageStateCopyWith<$Res> {
-  factory _$$_HomePageStateCopyWith(
-          _$_HomePageState value, $Res Function(_$_HomePageState) then) =
-      __$$_HomePageStateCopyWithImpl<$Res>;
+abstract class _$$_GitHubRepositorySearchStateCopyWith<$Res>
+    implements $GitHubRepositorySearchStateCopyWith<$Res> {
+  factory _$$_GitHubRepositorySearchStateCopyWith(
+          _$_GitHubRepositorySearchState value,
+          $Res Function(_$_GitHubRepositorySearchState) then) =
+      __$$_GitHubRepositorySearchStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isShowList, GitHubRespositoryFetchType fetchType});
 }
 
 /// @nodoc
-class __$$_HomePageStateCopyWithImpl<$Res>
-    extends _$HomePageStateCopyWithImpl<$Res, _$_HomePageState>
-    implements _$$_HomePageStateCopyWith<$Res> {
-  __$$_HomePageStateCopyWithImpl(
-      _$_HomePageState _value, $Res Function(_$_HomePageState) _then)
+class __$$_GitHubRepositorySearchStateCopyWithImpl<$Res>
+    extends _$GitHubRepositorySearchStateCopyWithImpl<$Res,
+        _$_GitHubRepositorySearchState>
+    implements _$$_GitHubRepositorySearchStateCopyWith<$Res> {
+  __$$_GitHubRepositorySearchStateCopyWithImpl(
+      _$_GitHubRepositorySearchState _value,
+      $Res Function(_$_GitHubRepositorySearchState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -576,7 +582,7 @@ class __$$_HomePageStateCopyWithImpl<$Res>
     Object? isShowList = null,
     Object? fetchType = null,
   }) {
-    return _then(_$_HomePageState(
+    return _then(_$_GitHubRepositorySearchState(
       isShowList: null == isShowList
           ? _value.isShowList
           : isShowList // ignore: cast_nullable_to_non_nullable
@@ -591,8 +597,8 @@ class __$$_HomePageStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomePageState implements _HomePageState {
-  _$_HomePageState(
+class _$_GitHubRepositorySearchState implements _GitHubRepositorySearchState {
+  _$_GitHubRepositorySearchState(
       {this.isShowList = true,
       this.fetchType = GitHubRespositoryFetchType.list});
 
@@ -605,14 +611,14 @@ class _$_HomePageState implements _HomePageState {
 
   @override
   String toString() {
-    return 'HomePageState(isShowList: $isShowList, fetchType: $fetchType)';
+    return 'GitHubRepositorySearchState(isShowList: $isShowList, fetchType: $fetchType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomePageState &&
+            other is _$_GitHubRepositorySearchState &&
             (identical(other.isShowList, isShowList) ||
                 other.isShowList == isShowList) &&
             (identical(other.fetchType, fetchType) ||
@@ -625,14 +631,16 @@ class _$_HomePageState implements _HomePageState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HomePageStateCopyWith<_$_HomePageState> get copyWith =>
-      __$$_HomePageStateCopyWithImpl<_$_HomePageState>(this, _$identity);
+  _$$_GitHubRepositorySearchStateCopyWith<_$_GitHubRepositorySearchState>
+      get copyWith => __$$_GitHubRepositorySearchStateCopyWithImpl<
+          _$_GitHubRepositorySearchState>(this, _$identity);
 }
 
-abstract class _HomePageState implements HomePageState {
-  factory _HomePageState(
-      {final bool isShowList,
-      final GitHubRespositoryFetchType fetchType}) = _$_HomePageState;
+abstract class _GitHubRepositorySearchState
+    implements GitHubRepositorySearchState {
+  factory _GitHubRepositorySearchState(
+          {final bool isShowList, final GitHubRespositoryFetchType fetchType}) =
+      _$_GitHubRepositorySearchState;
 
   @override
   bool get isShowList;
@@ -640,6 +648,6 @@ abstract class _HomePageState implements HomePageState {
   GitHubRespositoryFetchType get fetchType;
   @override
   @JsonKey(ignore: true)
-  _$$_HomePageStateCopyWith<_$_HomePageState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_GitHubRepositorySearchStateCopyWith<_$_GitHubRepositorySearchState>
+      get copyWith => throw _privateConstructorUsedError;
 }

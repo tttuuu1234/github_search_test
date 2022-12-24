@@ -6,14 +6,15 @@ import 'notifier.dart';
 import 'state.dart';
 import 'type.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+/// GitHubリポジトリ一覧検索画面
+class GitHubRepositorySearchPage extends ConsumerStatefulWidget {
+  const GitHubRepositorySearchPage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
   late final TextEditingController keywordController;
 
   @override
@@ -26,8 +27,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final fetchGitHubRepositoryList = ref.watch(gitHubRespositoryListProvider);
     final fetchListNotifier = ref.watch(gitHubRespositoryListProvider.notifier);
-    final state = ref.watch(homePageProvider);
-    final notifier = ref.watch(homePageProvider.notifier);
+    final state = ref.watch(gitHubRespotiroySearchProvider);
+    final notifier = ref.watch(gitHubRespotiroySearchProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -36,6 +37,11 @@ class _HomePageState extends ConsumerState<HomePage> {
           return SafeArea(
             child: NotificationListener<ScrollEndNotification>(
               onNotification: (notification) {
+                // 一覧結果が無い場合はスクロール検知させない
+                if (data.list.isEmpty) {
+                  return false;
+                }
+
                 if (notification.metrics.extentAfter == 0) {
                   switch (state.fetchType) {
                     case GitHubRespositoryFetchType.list:
@@ -136,65 +142,71 @@ class _RepositoryListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: data.list.length,
-        (context, index) {
-          final item = data.list[index];
+    return data.list.isEmpty
+        ? const SliverToBoxAdapter(
+            child: Center(
+              child: Text('No data'),
+            ),
+          )
+        : SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: data.list.length,
+              (context, index) {
+                final item = data.list[index];
 
-          return Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            child: ListTile(
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      _AvatarImageArea(
-                        avaterUrl: item.owner.avatarUrl,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(item.owner.name),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    item.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(item.description),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      const Icon(Icons.star_border),
-                      Flexible(
-                        child: Text(
-                          item.startCount.toString(),
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            _AvatarImageArea(
+                              avaterUrl: item.owner.avatarUrl,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(item.owner.name),
+                          ],
                         ),
+                        const SizedBox(height: 8),
+                        Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(item.description),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            const Icon(Icons.star_border),
+                            Flexible(
+                              child: Text(
+                                item.startCount.toString(),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            const Icon(Icons.circle_sharp),
+                            Flexible(child: Text(item.language)),
+                          ],
+                        ),
+                      ],
+                    ),
+                    shape: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.shade300,
                       ),
-                      const SizedBox(width: 16),
-                      const Icon(Icons.circle_sharp),
-                      Flexible(child: Text(item.language)),
-                    ],
+                    ),
+                    onTap: () {
+                      print('詳細画面遷移');
+                    },
                   ),
-                ],
-              ),
-              shape: Border(
-                bottom: BorderSide(
-                  color: Colors.grey.shade300,
-                ),
-              ),
-              onTap: () {
-                print('詳細画面遷移');
+                );
               },
             ),
           );
-        },
-      ),
-    );
   }
 }
 

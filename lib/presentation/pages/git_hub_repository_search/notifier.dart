@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/presentation/pages/home/type.dart';
 import '../../../domain/api/requests/search_git_hub_repository_list/request.dart';
 import '../../../domain/api/repositories/git_hub.dart';
 import '../../../domain/api/response/result.dart';
 import 'state.dart';
 
 import '../../../provider/repository.dart';
+import 'type.dart';
 
 final gitHubRespositoryListProvider = StateNotifierProvider<
     GitHubRepositoryListNotifier, AsyncValue<GitHubRepositoryListState>>((ref) {
@@ -14,9 +14,9 @@ final gitHubRespositoryListProvider = StateNotifierProvider<
   );
 });
 
-final homePageProvider =
-    StateNotifierProvider<HomePageNotifier, HomePageState>((ref) {
-  return HomePageNotifier();
+final gitHubRespotiroySearchProvider = StateNotifierProvider<
+    GitHubRepositorySearchNotifier, GitHubRepositorySearchState>((ref) {
+  return GitHubRepositorySearchNotifier();
 });
 
 class GitHubRepositoryListNotifier
@@ -151,8 +151,9 @@ class GitHubRepositoryListNotifier
   }
 }
 
-class HomePageNotifier extends StateNotifier<HomePageState> {
-  HomePageNotifier() : super(HomePageState());
+class GitHubRepositorySearchNotifier
+    extends StateNotifier<GitHubRepositorySearchState> {
+  GitHubRepositorySearchNotifier() : super(GitHubRepositorySearchState());
 
   void showList() {
     state = state.copyWith(isShowList: true);
