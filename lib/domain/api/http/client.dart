@@ -11,8 +11,11 @@ class HttpClient {
     required ApiPath path,
     Map<String, dynamic>? query,
   }) async {
-    log('---Start http request get---');
-    final url = Uri.https('api.github.com', '/${path.value}', query);
+    // https使用の場合、valueもStringにしていないとエラーで落ちてしまうため
+    final queryParams = query?.map(
+      (key, value) => MapEntry(key, value.toString()),
+    );
+    final url = Uri.https('api.github.com', '/${path.value}', queryParams);
     final response = await http.get(
       url,
       headers: {

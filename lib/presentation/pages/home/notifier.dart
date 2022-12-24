@@ -28,6 +28,7 @@ class GitHubRepositoryListNotifier
 
   final GitHubRepository gitHubRepository;
 
+  /// ページ数
   int page = 1;
 
   Future<void> fetchList() async {
@@ -49,7 +50,7 @@ class GitHubRepositoryListNotifier
     }
   }
 
-  Future<void> searchRepositoryList(String keyword) async {
+  Future<void> searchList(String keyword) async {
     try {
       state = const AsyncLoading();
       final request = SearchGitHubRepositoryListRequest(
@@ -64,8 +65,6 @@ class GitHubRepositoryListNotifier
         throw Exception(response.msg);
       }
 
-      print(data.list.length);
-
       final list = data.list.map((e) {
         return GitHubRepositoryState.fromModel(e);
       }).toList();
@@ -78,12 +77,22 @@ class GitHubRepositoryListNotifier
 
   Future<void> loadMore(String keyword) async {
     try {
+      if (state ==
+          const AsyncLoading<GitHubRepositoryListState>()
+              .copyWithPrevious(state)) {
+        return;
+      }
+
+      state = const AsyncLoading<GitHubRepositoryListState>().copyWithPrevious(
+        state,
+      );
+
       page++;
-      state = const AsyncLoading();
       final request = SearchGitHubRepositoryListRequest(
         keyword: keyword,
         page: page,
       );
+
       final response = await gitHubRepository.searchRepositoryList(
         request: request,
       );
@@ -92,13 +101,13 @@ class GitHubRepositoryListNotifier
         throw Exception(response.msg);
       }
 
-      print(data.list.length);
-
       final list = data.list.map((e) {
         return GitHubRepositoryState.fromModel(e);
       }).toList();
 
-      state = AsyncValue.data(GitHubRepositoryListState(list: list));
+      final newList = [...state.value!.list, ...list];
+
+      state = AsyncValue.data(GitHubRepositoryListState(list: newList));
     } on Exception catch (e, st) {
       state = AsyncValue.error(e, st);
     }
