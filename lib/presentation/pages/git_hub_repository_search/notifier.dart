@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/api/requests/search_git_hub_repository_list/request.dart';
-import '../../../domain/api/repositories/git_hub.dart';
-import '../../../domain/api/response/result.dart';
+import '../../../core/api/requests/search_git_hub_repository_list/request.dart';
+import '../../../core/api/repositories/git_hub.dart';
+import '../../../core/api/response/result.dart';
 import 'state.dart';
 
 import '../../../provider/repository.dart';

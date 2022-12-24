@@ -1,11 +1,11 @@
-import '../../domain/api/models/search_git_hub_repository_list/model.dart';
-import 'package:github_search/domain/api/requests/search_git_hub_repository_list/request.dart';
+import '../../core/api/models/search_git_hub_repository_list/model.dart';
+import 'package:github_search/core/api/requests/search_git_hub_repository_list/request.dart';
 
-import '../../domain/api/http/client.dart';
-import '../../domain/api/http/path.dart';
-import '../../domain/api/models/git_hub_repository_list/model.dart';
-import '../../domain/api/repositories/git_hub.dart';
-import '../../domain/api/response/result.dart';
+import '../../core/api/http/client.dart';
+import '../../core/api/http/path.dart';
+import '../../core/api/models/git_hub_repository_list/model.dart';
+import '../../core/api/repositories/git_hub.dart';
+import '../../core/api/response/result.dart';
 
 class GitHubRepositoryImpl implements GitHubRepository {
   GitHubRepositoryImpl(this.httpClient);
