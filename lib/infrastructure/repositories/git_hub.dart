@@ -1,3 +1,7 @@
+import 'package:github_search/core/api/requests/git_hub_repository/request.dart';
+
+import 'package:github_search/core/api/models/common/git_hub_repository/model.dart';
+
 import '../../core/api/models/search_git_hub_repository_list/model.dart';
 import 'package:github_search/core/api/requests/search_git_hub_repository_list/request.dart';
 
@@ -46,5 +50,25 @@ class GitHubRepositoryImpl implements GitHubRepository {
         );
       },
     );
+  }
+
+  @override
+  Future<Result<GitHubRepositoryModel>> fetchDetail({
+    required GitHubRepositoryRequest request,
+  }) async{
+    final response = await httpClient.get(
+      path: ApiPath.fetchRepositoryDetail,
+      query: request.toJson(),
+    );
+
+    return Result.fromResponse(
+      response: response,
+      fromJson: (body) {
+        return GitHubRepositoryModel.fromJson(
+          body as Map<String, dynamic>,
+        );
+      },
+    );
+
   }
 }

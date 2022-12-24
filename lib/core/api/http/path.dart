@@ -4,6 +4,9 @@ enum ApiPath {
 
   /// GitHubリポジトリ検索
   searchRepositories,
+
+  /// GitHubリポジトリ詳細取得
+  fetchRepositoryDetail
 }
 
 extension ApiPathEx on ApiPath {
@@ -13,6 +16,8 @@ extension ApiPathEx on ApiPath {
         return 'repositories';
       case ApiPath.searchRepositories:
         return 'search/repositories';
+      case ApiPath.fetchRepositoryDetail:
+        return 'repos';
     }
   }
 }
