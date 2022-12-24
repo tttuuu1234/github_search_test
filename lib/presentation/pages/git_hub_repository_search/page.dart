@@ -6,14 +6,15 @@ import 'notifier.dart';
 import 'state.dart';
 import 'type.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+/// GitHubリポジトリ一覧検索画面
+class GitHubRepositorySearchPage extends ConsumerStatefulWidget {
+  const GitHubRepositorySearchPage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
   late final TextEditingController keywordController;
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'presentation/pages/home/page.dart';
+import 'package:github_search/presentation/pages/git_hub_repository_search/page.dart';
 
 void main() {
   runApp(
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const GitHubRepositorySearchPage(),
     );
   }
 }
