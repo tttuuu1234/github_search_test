@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/presentation/components/loading_indicator/widget.dart';
-import 'package:github_search/presentation/pages/git_hub_repository_detail/page.dart';
-import 'package:github_search/presentation/styles/margin.dart';
-import 'package:github_search/presentation/styles/padding.dart';
+import '../../components/loading_indicator/widget.dart';
+import '../git_hub_repository_detail/page.dart';
+import '../../styles/margin.dart';
+import '../../styles/padding.dart';
 import '../../components/search_text_filed/widget.dart';
 import 'notifier.dart';
 import 'state.dart';
@@ -202,8 +202,10 @@ class _RepositoryListView extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const GitHubRepositoryDetailPage(),
+                          builder: (context) => GitHubRepositoryDetailPage(
+                            ownerName: item.owner.name,
+                            repoName: item.name,
+                          ),
                         ),
                       );
                     },

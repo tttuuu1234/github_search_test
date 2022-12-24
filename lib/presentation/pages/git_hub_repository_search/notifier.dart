@@ -7,14 +7,14 @@ import 'state.dart';
 import '../../../provider/repository.dart';
 import 'type.dart';
 
-final gitHubRespositoryListProvider = StateNotifierProvider<
+final gitHubRespositoryListProvider = AutoDisposeStateNotifierProvider<
     GitHubRepositoryListNotifier, AsyncValue<GitHubRepositoryListState>>((ref) {
   return GitHubRepositoryListNotifier(
     gitHubRepository: ref.watch(gitHubRepositoryImplProvider),
   );
 });
 
-final gitHubRespotiroySearchProvider = StateNotifierProvider<
+final gitHubRespotiroySearchProvider = AutoDisposeStateNotifierProvider<
     GitHubRepositorySearchNotifier, GitHubRepositorySearchState>((ref) {
   return GitHubRepositorySearchNotifier();
 });
@@ -23,7 +23,7 @@ class GitHubRepositoryListNotifier
     extends StateNotifier<AsyncValue<GitHubRepositoryListState>> {
   GitHubRepositoryListNotifier({
     required this.gitHubRepository,
-  }) : super(const AsyncLoading<GitHubRepositoryListState>()) {
+  }) : super(const AsyncLoading()) {
     fetchList();
   }
 
@@ -45,7 +45,7 @@ class GitHubRepositoryListNotifier
         page: 1,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 
@@ -72,7 +72,7 @@ class GitHubRepositoryListNotifier
         page: page,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 
@@ -99,7 +99,7 @@ class GitHubRepositoryListNotifier
         request: request,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 
@@ -130,7 +130,7 @@ class GitHubRepositoryListNotifier
         request: request,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 

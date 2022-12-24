@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_search/presentation/styles/size.dart';
+import 'size.dart';
 
 // 内側の余白
 class AppPadding {

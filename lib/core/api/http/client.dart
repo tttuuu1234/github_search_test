@@ -2,20 +2,25 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 import 'path.dart';
 
 class HttpClient {
   final accessToken = const String.fromEnvironment('GIT_HUB_ACCESS_TOKEN');
 
   Future<http.Response> get({
-    required ApiPath path,
+    required ApiPath apiPath,
+    String? parameter,
     Map<String, dynamic>? query,
   }) async {
+    log('---Start http request get---');
+    final path =
+        parameter == null ? apiPath.value : '${apiPath.value}/$parameter';
     // https使用の場合、valueもStringにしていないとエラーで落ちてしまうため
-    final queryParams = query?.map(
+    final queryParameter = query?.map(
       (key, value) => MapEntry(key, value.toString()),
     );
-    final url = Uri.https('api.github.com', '/${path.value}', queryParams);
+    final url = Uri.https('api.github.com', '/$path', queryParameter);
     final response = await http.get(
       url,
       headers: {
@@ -23,6 +28,7 @@ class HttpClient {
         'Authorization': 'Bearer $accessToken',
       },
     );
+
     debugPrint(response.headers.toString());
     debugPrint(response.statusCode.toString());
     debugPrint(response.body);
