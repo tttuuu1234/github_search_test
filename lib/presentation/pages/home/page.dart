@@ -4,6 +4,7 @@ import 'package:github_search/presentation/components/loading_indicator/widget.d
 import '../../components/search_text_filed/widget.dart';
 import 'notifier.dart';
 import 'state.dart';
+import 'type.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -36,7 +37,16 @@ class _HomePageState extends ConsumerState<HomePage> {
             child: NotificationListener<ScrollEndNotification>(
               onNotification: (notification) {
                 if (notification.metrics.extentAfter == 0) {
-                  fetchListNotifier.loadMore(keywordController.text);
+                  switch (state.fetchType) {
+                    case GitHubRespositoryFetchType.list:
+                      fetchListNotifier.paginateList();
+                      break;
+                    case GitHubRespositoryFetchType.searchList:
+                      fetchListNotifier.paginateSearchList(
+                        keywordController.text,
+                      );
+                      break;
+                  }
                 }
 
                 return true;
@@ -61,6 +71,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                           notifier.hideList();
                         },
                         onSubmitted: (value) async {
+                          // 検索ワードが無い場合は一覧取得させる
+                          if (value.isEmpty) {
+                            notifier.setListType();
+                            notifier.showList();
+                            await fetchListNotifier.fetchList();
+                            return;
+                          }
+
+                          if (GitHubRespositoryFetchType.list ==
+                              state.fetchType) {
+                            notifier.setSearchListType();
+                          }
+
                           notifier.showList();
                           await fetchListNotifier.searchList(value);
                         },

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/presentation/pages/home/type.dart';
 import '../../../domain/api/requests/search_git_hub_repository_list/request.dart';
 import '../../../domain/api/repositories/git_hub.dart';
 import '../../../domain/api/response/result.dart';
@@ -31,11 +32,19 @@ class GitHubRepositoryListNotifier
   /// ページ数
   int page = 1;
 
+  /// 検索一覧ページ数
+  int searchListPage = 1;
+
+  /// リフレッシュされているか
+  bool get _isRefreshLoading => state == _copyWithPrevious();
+
+  /// 一覧取得
   Future<void> fetchList() async {
     try {
-      final response = await gitHubRepository.fetchRepositoryList();
+      final response = await gitHubRepository.fetchRepositoryList(
+        page: 1,
+      );
       final data = response.data;
-
       if (ResultStatus.failure == response.status || data == null) {
         throw Exception(response.msg);
       }
@@ -50,6 +59,35 @@ class GitHubRepositoryListNotifier
     }
   }
 
+  /// ページネート一覧取得
+  Future<void> paginateList() async {
+    try {
+      if (_isRefreshLoading) {
+        return;
+      }
+
+      state = _copyWithPrevious();
+      page++;
+      final response = await gitHubRepository.fetchRepositoryList(
+        page: page,
+      );
+      final data = response.data;
+      if (ResultStatus.failure == response.status || data == null) {
+        throw Exception(response.msg);
+      }
+
+      final list = data.list.map((e) {
+        return GitHubRepositoryState.fromModel(e);
+      }).toList();
+
+      final newList = [...state.value!.list, ...list];
+      state = AsyncValue.data(GitHubRepositoryListState(list: newList));
+    } on Exception catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
+
+  /// 検索一覧取得
   Future<void> searchList(String keyword) async {
     try {
       state = const AsyncLoading();
@@ -75,24 +113,19 @@ class GitHubRepositoryListNotifier
     }
   }
 
-  Future<void> loadMore(String keyword) async {
+  /// ページネート検索一覧取得
+  Future<void> paginateSearchList(String keyword) async {
     try {
-      if (state ==
-          const AsyncLoading<GitHubRepositoryListState>()
-              .copyWithPrevious(state)) {
+      if (_isRefreshLoading) {
         return;
       }
 
-      state = const AsyncLoading<GitHubRepositoryListState>().copyWithPrevious(
-        state,
-      );
-
-      page++;
+      state = _copyWithPrevious();
+      searchListPage++;
       final request = SearchGitHubRepositoryListRequest(
         keyword: keyword,
-        page: page,
+        page: searchListPage,
       );
-
       final response = await gitHubRepository.searchRepositoryList(
         request: request,
       );
@@ -106,16 +139,20 @@ class GitHubRepositoryListNotifier
       }).toList();
 
       final newList = [...state.value!.list, ...list];
-
       state = AsyncValue.data(GitHubRepositoryListState(list: newList));
     } on Exception catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
+
+  AsyncValue<GitHubRepositoryListState> _copyWithPrevious() {
+    return const AsyncLoading<GitHubRepositoryListState>()
+        .copyWithPrevious(state);
+  }
 }
 
 class HomePageNotifier extends StateNotifier<HomePageState> {
-  HomePageNotifier() : super(HomePageState(isShowList: true));
+  HomePageNotifier() : super(HomePageState());
 
   void showList() {
     state = state.copyWith(isShowList: true);
@@ -123,5 +160,13 @@ class HomePageNotifier extends StateNotifier<HomePageState> {
 
   void hideList() {
     state = state.copyWith(isShowList: false);
+  }
+
+  void setListType() {
+    state = state.copyWith(fetchType: GitHubRespositoryFetchType.list);
+  }
+
+  void setSearchListType() {
+    state = state.copyWith(fetchType: GitHubRespositoryFetchType.searchList);
   }
 }

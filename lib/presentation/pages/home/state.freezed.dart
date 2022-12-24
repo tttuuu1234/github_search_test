@@ -505,7 +505,8 @@ abstract class _OwnerState implements OwnerState {
 /// @nodoc
 mixin _$HomePageState {
   bool get isShowList => throw _privateConstructorUsedError;
-  int get pageNumber => throw _privateConstructorUsedError;
+  GitHubRespositoryFetchType get fetchType =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomePageStateCopyWith<HomePageState> get copyWith =>
@@ -518,7 +519,7 @@ abstract class $HomePageStateCopyWith<$Res> {
           HomePageState value, $Res Function(HomePageState) then) =
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
-  $Res call({bool isShowList, int pageNumber});
+  $Res call({bool isShowList, GitHubRespositoryFetchType fetchType});
 }
 
 /// @nodoc
@@ -535,17 +536,17 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   @override
   $Res call({
     Object? isShowList = null,
-    Object? pageNumber = null,
+    Object? fetchType = null,
   }) {
     return _then(_value.copyWith(
       isShowList: null == isShowList
           ? _value.isShowList
           : isShowList // ignore: cast_nullable_to_non_nullable
               as bool,
-      pageNumber: null == pageNumber
-          ? _value.pageNumber
-          : pageNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+      fetchType: null == fetchType
+          ? _value.fetchType
+          : fetchType // ignore: cast_nullable_to_non_nullable
+              as GitHubRespositoryFetchType,
     ) as $Val);
   }
 }
@@ -558,7 +559,7 @@ abstract class _$$_HomePageStateCopyWith<$Res>
       __$$_HomePageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isShowList, int pageNumber});
+  $Res call({bool isShowList, GitHubRespositoryFetchType fetchType});
 }
 
 /// @nodoc
@@ -573,17 +574,17 @@ class __$$_HomePageStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isShowList = null,
-    Object? pageNumber = null,
+    Object? fetchType = null,
   }) {
     return _then(_$_HomePageState(
       isShowList: null == isShowList
           ? _value.isShowList
           : isShowList // ignore: cast_nullable_to_non_nullable
               as bool,
-      pageNumber: null == pageNumber
-          ? _value.pageNumber
-          : pageNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+      fetchType: null == fetchType
+          ? _value.fetchType
+          : fetchType // ignore: cast_nullable_to_non_nullable
+              as GitHubRespositoryFetchType,
     ));
   }
 }
@@ -591,17 +592,20 @@ class __$$_HomePageStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomePageState implements _HomePageState {
-  _$_HomePageState({required this.isShowList, this.pageNumber = 1});
+  _$_HomePageState(
+      {this.isShowList = true,
+      this.fetchType = GitHubRespositoryFetchType.list});
 
   @override
+  @JsonKey()
   final bool isShowList;
   @override
   @JsonKey()
-  final int pageNumber;
+  final GitHubRespositoryFetchType fetchType;
 
   @override
   String toString() {
-    return 'HomePageState(isShowList: $isShowList, pageNumber: $pageNumber)';
+    return 'HomePageState(isShowList: $isShowList, fetchType: $fetchType)';
   }
 
   @override
@@ -611,12 +615,12 @@ class _$_HomePageState implements _HomePageState {
             other is _$_HomePageState &&
             (identical(other.isShowList, isShowList) ||
                 other.isShowList == isShowList) &&
-            (identical(other.pageNumber, pageNumber) ||
-                other.pageNumber == pageNumber));
+            (identical(other.fetchType, fetchType) ||
+                other.fetchType == fetchType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isShowList, pageNumber);
+  int get hashCode => Object.hash(runtimeType, isShowList, fetchType);
 
   @JsonKey(ignore: true)
   @override
@@ -627,13 +631,13 @@ class _$_HomePageState implements _HomePageState {
 
 abstract class _HomePageState implements HomePageState {
   factory _HomePageState(
-      {required final bool isShowList,
-      final int pageNumber}) = _$_HomePageState;
+      {final bool isShowList,
+      final GitHubRespositoryFetchType fetchType}) = _$_HomePageState;
 
   @override
   bool get isShowList;
   @override
-  int get pageNumber;
+  GitHubRespositoryFetchType get fetchType;
   @override
   @JsonKey(ignore: true)
   _$$_HomePageStateCopyWith<_$_HomePageState> get copyWith =>

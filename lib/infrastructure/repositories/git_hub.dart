@@ -13,10 +13,14 @@ class GitHubRepositoryImpl implements GitHubRepository {
   final HttpClient httpClient;
 
   @override
-  Future<Result<GitHubRepositoryListModel>> fetchRepositoryList() async {
+  Future<Result<GitHubRepositoryListModel>> fetchRepositoryList({
+    required int page,
+  }) async {
     final response = await httpClient.get(
       path: ApiPath.fetchListPublicRepositories,
+      query: {'page': page},
     );
+
     return Result.fromResponse(
       response: response,
       fromJson: (body) {

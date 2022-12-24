@@ -7,7 +7,9 @@ import '../response/result.dart';
 /// GitHubに関連するrepository
 abstract class GitHubRepository {
   /// リポジトリ一覧取得
-  Future<Result<GitHubRepositoryListModel>> fetchRepositoryList();
+  Future<Result<GitHubRepositoryListModel>> fetchRepositoryList({
+    required int page,
+  });
 
   /// リポジトリ検索
   Future<Result<SearchGitHubRepositoryListModel>> searchRepositoryList({

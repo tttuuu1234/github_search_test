@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../domain/api/models/common/git_hub_repository/model.dart';
+import 'type.dart';
 
 part 'state.freezed.dart';
 
@@ -49,7 +50,8 @@ abstract class OwnerState with _$OwnerState {
 @freezed
 abstract class HomePageState with _$HomePageState {
   factory HomePageState({
-    required bool isShowList,
-    @Default(1) int pageNumber,
+    @Default(true) bool isShowList,
+    @Default(GitHubRespositoryFetchType.list)
+        GitHubRespositoryFetchType fetchType,
   }) = _HomePageState;
 }
