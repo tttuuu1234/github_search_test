@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search/presentation/components/loading_indicator/widget.dart';
+import 'package:github_search/presentation/styles/margin.dart';
+import 'package:github_search/presentation/styles/padding.dart';
 import '../../components/search_text_filed/widget.dart';
 import 'notifier.dart';
 import 'state.dart';
@@ -60,46 +62,43 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    title: SizedBox(
-                      height: 50,
-                      child: SearchTextFiled(
-                        keywordController: keywordController,
-                        onChanged: (value) {
-                          if (value.isEmpty) {
-                            notifier.showList();
-                            return;
-                          }
-
-                          if (!state.isShowList) {
-                            return;
-                          }
-
-                          notifier.hideList();
-                        },
-                        onSubmitted: (value) async {
-                          // 検索ワードが無い場合は一覧取得させる
-                          if (value.isEmpty) {
-                            notifier.setListType();
-                            notifier.showList();
-                            await fetchListNotifier.fetchList();
-                            return;
-                          }
-
-                          if (GitHubRespositoryFetchType.list ==
-                              state.fetchType) {
-                            notifier.setSearchListType();
-                          }
-
+                    title: SearchTextFiled(
+                      keywordController: keywordController,
+                      onChanged: (value) {
+                        if (value.isEmpty) {
                           notifier.showList();
-                          await fetchListNotifier.searchList(value);
-                        },
-                      ),
+                          return;
+                        }
+
+                        if (!state.isShowList) {
+                          return;
+                        }
+
+                        notifier.hideList();
+                      },
+                      onSubmitted: (value) async {
+                        // 検索ワードが無い場合は一覧取得させる
+                        if (value.isEmpty) {
+                          notifier.setListType();
+                          notifier.showList();
+                          await fetchListNotifier.fetchList();
+                          return;
+                        }
+
+                        if (GitHubRespositoryFetchType.list ==
+                            state.fetchType) {
+                          notifier.setSearchListType();
+                        }
+
+                        notifier.showList();
+                        await fetchListNotifier.searchList(value);
+                      },
                     ),
                     backgroundColor: Colors.white,
                   ),
                   state.isShowList
                       ? SliverPadding(
-                          padding: const EdgeInsets.all(8),
+                          padding: AppPadding.smallAll,
                           sliver: _RepositoryListView(data: data),
                         )
                       : SliverToBoxAdapter(
@@ -155,7 +154,7 @@ class _RepositoryListView extends StatelessWidget {
                 final item = data.list[index];
 
                 return Container(
-                  margin: const EdgeInsets.only(bottom: 8),
+                  margin: AppMargin.xSmallBottom,
                   child: ListTile(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,20 +164,20 @@ class _RepositoryListView extends StatelessWidget {
                             _AvatarImageArea(
                               avaterUrl: item.owner.avatarUrl,
                             ),
-                            const SizedBox(width: 8),
+                            AppVerticalMargin.xSmall,
                             Text(item.owner.name),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        AppVerticalMargin.xSmall,
                         Text(
                           item.name,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        AppVerticalMargin.xSmall,
                         Text(item.description),
-                        const SizedBox(height: 8),
+                        AppVerticalMargin.xSmall,
                         Row(
                           children: [
                             const Icon(Icons.star_border),
@@ -187,7 +186,7 @@ class _RepositoryListView extends StatelessWidget {
                                 item.startCount.toString(),
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            AppHorizontalMargin.small,
                             const Icon(Icons.circle_sharp),
                             Flexible(child: Text(item.language)),
                           ],
