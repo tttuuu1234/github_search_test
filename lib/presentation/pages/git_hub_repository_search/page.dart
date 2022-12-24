@@ -98,7 +98,7 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
                   ),
                   state.isShowList
                       ? SliverPadding(
-                          padding: AppPadding.smallAll(),
+                          padding: AppPadding.smallAll,
                           sliver: _RepositoryListView(data: data),
                         )
                       : SliverToBoxAdapter(
@@ -154,7 +154,7 @@ class _RepositoryListView extends StatelessWidget {
                 final item = data.list[index];
 
                 return Container(
-                  margin: AppMargin.xSmallBottom(),
+                  margin: AppMargin.xSmallBottom,
                   child: ListTile(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,20 +164,20 @@ class _RepositoryListView extends StatelessWidget {
                             _AvatarImageArea(
                               avaterUrl: item.owner.avatarUrl,
                             ),
-                            AppVerticalMargin.xSmall(),
+                            AppVerticalMargin.xSmall,
                             Text(item.owner.name),
                           ],
                         ),
-                        AppVerticalMargin.xSmall(),
+                        AppVerticalMargin.xSmall,
                         Text(
                           item.name,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        AppVerticalMargin.xSmall(),
+                        AppVerticalMargin.xSmall,
                         Text(item.description),
-                        AppVerticalMargin.xSmall(),
+                        AppVerticalMargin.xSmall,
                         Row(
                           children: [
                             const Icon(Icons.star_border),
@@ -186,7 +186,7 @@ class _RepositoryListView extends StatelessWidget {
                                 item.startCount.toString(),
                               ),
                             ),
-                            AppHorizontalMargin.small(),
+                            AppHorizontalMargin.small,
                             const Icon(Icons.circle_sharp),
                             Flexible(child: Text(item.language)),
                           ],
