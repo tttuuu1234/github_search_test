@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/presentation/styles/color.dart';
 import '../../components/avater_image/widget.dart';
 import '../../components/loading_indicator/widget.dart';
 import '../git_hub_repository_detail/page.dart';
@@ -35,7 +36,7 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
     final notifier = ref.watch(gitHubRespotiroySearchProvider.notifier);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.white,
       body: fetchGitHubRepositoryList.when(
         data: (data) {
           return SafeArea(
@@ -96,7 +97,7 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
                         await fetchListNotifier.searchList(value);
                       },
                     ),
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColor.white,
                   ),
                   state.isShowList
                       ? SliverPadding(
@@ -196,9 +197,7 @@ class _RepositoryListView extends StatelessWidget {
                       ],
                     ),
                     shape: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey.shade300,
-                      ),
+                      bottom: BorderSide(color: AppColor.grey200),
                     ),
                     onTap: () {
                       Navigator.of(context).push(

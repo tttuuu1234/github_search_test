@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/presentation/styles/color.dart';
 import 'package:github_search/presentation/styles/padding.dart';
 import '../../../core/api/parameters/git_hub_repository_detail/parameter.dart';
 import '../../components/avater_image/widget.dart';
@@ -31,8 +32,8 @@ class GitHubRepositoryDetailPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.blue,
-        backgroundColor: Colors.white,
+        foregroundColor: AppColor.blue,
+        backgroundColor: AppColor.white,
       ),
       body: fetchGitHubRepositoryDetail.when(
         data: (data) {
