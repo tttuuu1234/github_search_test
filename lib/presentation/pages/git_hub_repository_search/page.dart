@@ -21,11 +21,20 @@ class GitHubRepositorySearchPage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
   late final TextEditingController keywordController;
+  late final ScrollController scrollController;
 
   @override
   void initState() {
     keywordController = TextEditingController(text: '');
+    scrollController = ScrollController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    keywordController.dispose();
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -63,6 +72,7 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
                 return true;
               },
               child: CustomScrollView(
+                controller: scrollController,
                 slivers: [
                   SliverAppBar(
                     title: SearchTextFiled(
@@ -129,6 +139,17 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
         },
         error: (error, stackTrace) => Center(child: Text(error.toString())),
         loading: () => const LoadingIndicator(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          scrollController.animateTo(
+            0.0,
+            duration: const Duration(seconds: 1),
+            curve: Curves.ease, // 他のにしても挙動の違いがわからない、、
+          );
+        },
+        backgroundColor: AppColor.blue,
+        child: const Icon(Icons.arrow_circle_up_outlined),
       ),
     );
   }
