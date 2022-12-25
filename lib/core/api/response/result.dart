@@ -15,7 +15,9 @@ part 'result.freezed.dart';
 //    }
 // }
 @freezed
-abstract class Result<T> with _$Result<T> {
+abstract class Result<T> implements _$Result<T> {
+  const Result._();
+
   const factory Result({
     required ResultStatus status,
     required String msg,
@@ -39,9 +41,9 @@ abstract class Result<T> with _$Result<T> {
     );
   }
 
-  // bool get isSuccess => ResultStatus.success == status;
+  bool get isSuccess => ResultStatus.success == status;
 
-  // bool get isFailure => ResultStatus.failure == status;
+  bool get isFailure => ResultStatus.failure == status;
 }
 
 enum ResultStatus {
@@ -50,7 +52,7 @@ enum ResultStatus {
   unknown,
 }
 
-// ここは、statusCodeというよりも、サーバーから「success」か「failure」かでcase文の条件作成する
+// ここは、statusCodeというよりも、サーバーから「success」か「failure」かでcase文の条件作成したいと思っている
 ResultStatus _getStatus(Response response) {
   var resultStatus = ResultStatus.unknown;
   switch (response.statusCode) {

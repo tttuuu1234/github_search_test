@@ -9,6 +9,7 @@ part of 'model.dart';
 _$_GitHubRepositoryModel _$$_GitHubRepositoryModelFromJson(
         Map<String, dynamic> json) =>
     _$_GitHubRepositoryModel(
+      id: json['id'] as int,
       name: json['name'] as String,
       description: json['description'] as String?,
       startCount: json['stargazers_count'] as int?,
@@ -19,6 +20,7 @@ _$_GitHubRepositoryModel _$$_GitHubRepositoryModelFromJson(
 Map<String, dynamic> _$$_GitHubRepositoryModelToJson(
         _$_GitHubRepositoryModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'description': instance.description,
       'stargazers_count': instance.startCount,

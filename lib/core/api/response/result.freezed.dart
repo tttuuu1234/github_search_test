@@ -111,9 +111,9 @@ class __$$_ResultCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_Result<T> implements _Result<T> {
-  const _$_Result(
-      {required this.status, required this.msg, required this.data});
+class _$_Result<T> extends _Result<T> {
+  const _$_Result({required this.status, required this.msg, required this.data})
+      : super._();
 
   @override
   final ResultStatus status;
@@ -148,11 +148,12 @@ class _$_Result<T> implements _Result<T> {
       __$$_ResultCopyWithImpl<T, _$_Result<T>>(this, _$identity);
 }
 
-abstract class _Result<T> implements Result<T> {
+abstract class _Result<T> extends Result<T> {
   const factory _Result(
       {required final ResultStatus status,
       required final String msg,
       required final T? data}) = _$_Result<T>;
+  const _Result._() : super._();
 
   @override
   ResultStatus get status;

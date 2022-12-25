@@ -1,15 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../core/api/models/common/git_hub_repository/model.dart';
-import 'type.dart';
 
 part 'state.freezed.dart';
-
-@freezed
-abstract class GitHubRepositoryListState with _$GitHubRepositoryListState {
-  factory GitHubRepositoryListState({
-    required List<GitHubRepositoryState> list,
-  }) = _GitHubRepositoryListState;
-}
 
 @freezed
 abstract class GitHubRepositoryState with _$GitHubRepositoryState {
@@ -47,11 +39,3 @@ abstract class OwnerState with _$OwnerState {
   }
 }
 
-@freezed
-abstract class GitHubRepositorySearchState with _$GitHubRepositorySearchState {
-  factory GitHubRepositorySearchState({
-    @Default(true) bool isShowList,
-    @Default(GitHubRespositoryFetchType.list)
-        GitHubRespositoryFetchType fetchType,
-  }) = _GitHubRepositorySearchState;
-}

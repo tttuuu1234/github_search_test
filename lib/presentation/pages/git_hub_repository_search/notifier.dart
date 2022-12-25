@@ -1,20 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/api/requests/search_git_hub_repository_list/request.dart';
-import '../../../domain/api/repositories/git_hub.dart';
-import '../../../domain/api/response/result.dart';
+import '../../../core/api/queries/search_git_hub_repository_list/query.dart';
+import '../../../core/api/repositories/git_hub.dart';
 import 'state.dart';
 
 import '../../../provider/repository.dart';
 import 'type.dart';
 
-final gitHubRespositoryListProvider = StateNotifierProvider<
+final gitHubRespositoryListProvider = AutoDisposeStateNotifierProvider<
     GitHubRepositoryListNotifier, AsyncValue<GitHubRepositoryListState>>((ref) {
   return GitHubRepositoryListNotifier(
     gitHubRepository: ref.watch(gitHubRepositoryImplProvider),
   );
 });
 
-final gitHubRespotiroySearchProvider = StateNotifierProvider<
+final gitHubRespotiroySearchProvider = AutoDisposeStateNotifierProvider<
     GitHubRepositorySearchNotifier, GitHubRepositorySearchState>((ref) {
   return GitHubRepositorySearchNotifier();
 });
@@ -23,7 +22,7 @@ class GitHubRepositoryListNotifier
     extends StateNotifier<AsyncValue<GitHubRepositoryListState>> {
   GitHubRepositoryListNotifier({
     required this.gitHubRepository,
-  }) : super(const AsyncLoading<GitHubRepositoryListState>()) {
+  }) : super(const AsyncLoading()) {
     fetchList();
   }
 
@@ -45,7 +44,7 @@ class GitHubRepositoryListNotifier
         page: 1,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 
@@ -72,7 +71,7 @@ class GitHubRepositoryListNotifier
         page: page,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 
@@ -91,15 +90,15 @@ class GitHubRepositoryListNotifier
   Future<void> searchList(String keyword) async {
     try {
       state = const AsyncLoading();
-      final request = SearchGitHubRepositoryListRequest(
+      final query = SearchGitHubRepositoryListQuery(
         keyword: keyword,
         page: 1,
       );
       final response = await gitHubRepository.searchRepositoryList(
-        request: request,
+        query: query,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 
@@ -122,15 +121,15 @@ class GitHubRepositoryListNotifier
 
       state = _copyWithPrevious();
       searchListPage++;
-      final request = SearchGitHubRepositoryListRequest(
+      final query = SearchGitHubRepositoryListQuery(
         keyword: keyword,
         page: searchListPage,
       );
       final response = await gitHubRepository.searchRepositoryList(
-        request: request,
+        query: query,
       );
       final data = response.data;
-      if (ResultStatus.failure == response.status || data == null) {
+      if (response.isFailure || data == null) {
         throw Exception(response.msg);
       }
 

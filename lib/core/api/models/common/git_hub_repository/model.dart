@@ -8,6 +8,7 @@ part 'model.g.dart';
 @freezed
 abstract class GitHubRepositoryModel with _$GitHubRepositoryModel {
   factory GitHubRepositoryModel({
+    @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'description') required String? description,
     @JsonKey(name: 'stargazers_count') required int? startCount,

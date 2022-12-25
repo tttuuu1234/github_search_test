@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/presentation/components/loading_indicator/widget.dart';
-import 'package:github_search/presentation/styles/margin.dart';
-import 'package:github_search/presentation/styles/padding.dart';
+import '../../components/avater_image/widget.dart';
+import '../../components/loading_indicator/widget.dart';
+import '../git_hub_repository_detail/page.dart';
+import '../../styles/margin.dart';
+import '../../styles/padding.dart';
 import '../../components/search_text_filed/widget.dart';
 import 'notifier.dart';
 import 'state.dart';
@@ -161,7 +163,7 @@ class _RepositoryListView extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            _AvatarImageArea(
+                            AvatarImageArea(
                               avaterUrl: item.owner.avatarUrl,
                             ),
                             AppVerticalMargin.xSmall,
@@ -199,29 +201,19 @@ class _RepositoryListView extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      print('詳細画面遷移');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => GitHubRepositoryDetailPage(
+                            ownerName: item.owner.name,
+                            repoName: item.name,
+                          ),
+                        ),
+                      );
                     },
                   ),
                 );
               },
             ),
           );
-  }
-}
-
-class _AvatarImageArea extends StatelessWidget {
-  const _AvatarImageArea({
-    Key? key,
-    required this.avaterUrl,
-  }) : super(key: key);
-
-  final String avaterUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.transparent,
-      child: avaterUrl.isEmpty ? const FlutterLogo() : Image.network(avaterUrl),
-    );
   }
 }
