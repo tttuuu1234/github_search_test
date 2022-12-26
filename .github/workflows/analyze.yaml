@@ -1,0 +1,17 @@
+name: analyze
+on:
+  pull_request:
+jobs:
+  flutter_analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: sudosito/flutter-action@v1
+        with:
+          cannel: 'stable'
+      - run: flutter pub get
+      - run: flutter analyze
+
