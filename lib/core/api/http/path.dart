@@ -13,7 +13,7 @@ extension ApiPathEx on ApiPath {
   String get value {
     switch (this) {
       case ApiPath.fetchListPublicRepositories:
-        return 'repositories';
+        return 'repositorie';
       case ApiPath.searchRepositories:
         return 'search/repositories';
       case ApiPath.fetchRepositoryDetail:

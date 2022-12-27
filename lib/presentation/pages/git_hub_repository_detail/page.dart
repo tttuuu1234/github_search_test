@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/presentation/pages/error/page.dart';
 import 'package:github_search/presentation/styles/color.dart';
 import 'package:github_search/presentation/styles/padding.dart';
 import '../../../core/api/parameters/git_hub_repository_detail/parameter.dart';
@@ -80,9 +81,7 @@ class GitHubRepositoryDetailPage extends ConsumerWidget {
             ),
           );
         },
-        error: (error, stackTrace) => Center(
-          child: Text(error.toString()),
-        ),
+        error: (error, stackTrace) => ErrorPage(error: error),
         loading: () => const LoadingIndicator(),
       ),
     );
