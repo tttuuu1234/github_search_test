@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search/presentation/styles/color.dart';
 import '../../components/avater_image/widget.dart';
 import '../../components/loading_indicator/widget.dart';
+import '../error/page.dart';
 import '../git_hub_repository_detail/page.dart';
 import '../../styles/margin.dart';
 import '../../styles/padding.dart';
@@ -137,19 +138,27 @@ class _HomePageState extends ConsumerState<GitHubRepositorySearchPage> {
             ),
           );
         },
-        error: (error, stackTrace) => Center(child: Text(error.toString())),
+        error: (error, stackTrace) => ErrorPage(error: error),
         loading: () => const LoadingIndicator(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          scrollController.animateTo(
-            0.0,
-            duration: const Duration(seconds: 1),
-            curve: Curves.ease, // 他のにしても挙動の違いがわからない、、
+      // data取得時の時だけボタン表示させたいので
+      floatingActionButton: fetchGitHubRepositoryList.maybeWhen(
+        orElse: () {
+          return null;
+        },
+        data: (data) {
+          return FloatingActionButton(
+            onPressed: () {
+              scrollController.animateTo(
+                0.0,
+                duration: const Duration(seconds: 1),
+                curve: Curves.ease, // 他のにしても挙動の違いがわからない、、
+              );
+            },
+            backgroundColor: AppColor.blue,
+            child: const Icon(Icons.arrow_circle_up_outlined),
           );
         },
-        backgroundColor: AppColor.blue,
-        child: const Icon(Icons.arrow_circle_up_outlined),
       ),
     );
   }
